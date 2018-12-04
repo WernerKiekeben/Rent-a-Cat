@@ -1,0 +1,45 @@
+/* .col-lg {
+    border:1px solid black;
+    align-items: center;
+} */
+
+.card {
+    width:15rem;
+    margin:10px auto;
+    height:350px;
+}
+
+#image {
+    width:100%
+}
+
+ul {
+    list-style: none;
+}
+
+/* .card-img-top:hover{
+    cursor: pointer;
+} */
+
+.hidden {
+    display:none;
+}
+
+.card-body{
+    background: #e1e1e1;
+}
+
+.card-img-top {
+    width:100%;
+    height:100%;
+}
+
+.w {
+    width:100%;
+    height:55%;
+}
+
+.modal-body {
+    background:#e8e8e8;
+    min-height: 275px;
+}
