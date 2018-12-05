@@ -44,10 +44,27 @@ ul {
     min-height: 275px;
 }
 
-
 #srch_form {
     width:100%;
-    background: #e1e1e1;
+}
+
+tr:hover {
+    cursor: pointer;
+}
+
+#content2 {
+    width:80%;
+    margin: 50px auto;
+    background:#e1e1e1;
+    padding:15px;
+}
+
+#content {
+    margin: 50px auto;
+}
+
+nav {
+    background: #e8e8e8;
 }
 
 /* .av {

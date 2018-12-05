@@ -28,7 +28,7 @@ $(document).ready(function(){
             $('#description').text(description);
             $('#image').attr('src', source);
         });
-    });    
+    });
 });
 
 $(document).on('click','#s-form', function(e){
@@ -119,3 +119,7 @@ $(document).on('click', '.pagination a',function(e){
     }
 });
 
+$(document).on('click', 'tr', function(){
+    var id = ($(this).data('id'));
+    window.location.href = "/cars/"+id;
+});

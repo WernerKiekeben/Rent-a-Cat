@@ -15,7 +15,7 @@ class CarsController extends Controller
      */
     public function index()
     {
-        $cars = Cars::paginate(5);
+        $cars = Cars::paginate(10);
         return view('cars.cars')->with('cars', $cars);
     }
 
@@ -31,9 +31,9 @@ class CarsController extends Controller
             ['model','LIKE','%'.$model.'%'],
             ['year','>=',$year],
             ['availability','=',$avail],
-        ])->paginate(5);
+        ])->paginate(10);
         
-        return view('extra')->with('cars',$car)->render();
+        return view('cars.table')->with('cars',$car)->render(); // extra
     }
 
     /**
@@ -65,7 +65,8 @@ class CarsController extends Controller
      */
     public function show($id)
     {
-        //
+        $car = Cars::find($id);
+        return view('cars.show')->with('car', $car);
     }
 
     /**
