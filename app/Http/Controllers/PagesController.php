@@ -8,7 +8,7 @@ use App\Cars;
 class PagesController extends Controller
 {
     public function index(){
-        $cars = Cars::all();
+        $cars = Cars::take(8)->get();
         return view('pages.index')->with('cars', $cars);
     }
 

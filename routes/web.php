@@ -1,5 +1,5 @@
 <?php
-
+use App\Cars;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,3 +17,6 @@ Route::get('/about', 'PagesController@about');
 
 Route::get('/contacts', 'PagesController@contacts');
 
+Route::resource('cars', 'CarsController');
+
+Route::get('ajax/search', 'CarsController@search');
