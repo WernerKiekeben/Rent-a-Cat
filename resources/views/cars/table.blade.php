@@ -14,9 +14,9 @@
                 <td>{{$car->year}}</td>
                 <td>
                     @if($car->availability == 1)
-                    Available
+                     <span class="av">Available </span>
                     @else
-                    Unavailable
+                     <span class="uv">Unavailable </span>
                     @endif
                 </td>
             </tr>

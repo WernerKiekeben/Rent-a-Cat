@@ -54,23 +54,22 @@ tr:hover {
 
 #content2 {
     width:80%;
-    margin: 50px auto;
-    background:#e1e1e1;
+    margin: 0 auto;
     padding:15px;
 }
 
-#content {
+.container {
     margin: 50px auto;
 }
 
-nav {
-    background: #e8e8e8;
+ul#list {
+    margin-top:15px;
 }
 
-/* .av {
+.av {
     color:green;
 }
 
 .uv {
     color:red;
-} */
+}

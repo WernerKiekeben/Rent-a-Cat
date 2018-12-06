@@ -47,7 +47,9 @@
                     </div>
                 </div>
                 <br>
-                <p id="description"></p>
+                <div>
+                    <p id="description"></p>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

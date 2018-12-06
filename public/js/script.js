@@ -33,16 +33,10 @@ $(document).ready(function(){
 
 $(document).on('click','#s-form', function(e){
     e.preventDefault();
+
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
-    var brand = $('#brand').val();
-    var model = $('#model').val();
-    var year = $('#year').val();
-    var available = 0;
-    var avail_check = $('#available');
-    if(avail_check.is(':checked')){
-        var available = 1;
-    }
+    var [brand, model, year, available] = values();
 
     var data = {
         _token:CSRF_TOKEN,
@@ -52,73 +46,78 @@ $(document).on('click','#s-form', function(e){
         available:available
     };
 
-    $.ajax({
-        url:'/ajax/search',
-        data:data,
-        success:function(response) {
-            $('#car_table').html(response);
-        }
-    });
+    var url = "/ajax/search";
+
+    ajaxRequest(url,data);
 });
 
-
+// makes ajax pagination within a search
 $(document).on('click', '.pagination a',function(e){
-    if(window.location.href.includes("ajax") || $(this).attr('href').includes("ajax")){
-
+    if($(this).attr('href').includes("ajax")){
         e.preventDefault();
+
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        var data = {_token:CSRF_TOKEN};
+
+        var [brand, model, year, available] = values();
 
         var b = "brand";
         var m = "model";
         var y = "year";
 
-        var bValue;
-        var mValue;
-        var yValue;
-        var available = 0;
-        
-        if($('#available').is(':checked')){
-            var available = 1;
-        }
-
-        var destiny = $(this).attr('href');
-        var page = destiny.split('page=')[1];
-
         var url ="/ajax/search?";
-        var data = {_token:CSRF_TOKEN};
+
+        var href = $(this).attr('href');
 
         // checks if href in pagination contains search criteria and modifies data and url accordingly
-        if(destiny.includes(b)){   
-            var bValue = ($('#brand').val());
-            url += "brand="+bValue;
-            data.brand = bValue;
+        if(href.includes(b)){
+            url += "brand="+brand;
+            data.brand = brand;
         }
-        if(destiny.includes(m)){   
-            var mValue = ($('#model').val());
-            url += "&model="+mValue;
-            data.model = mValue;
+        if(href.includes(m)){
+            url += "&model="+model;
+            data.model = model;
         }
-        if(destiny.includes(y)){   
-            var yValue = ($('#year').val());
-            url += "&year="+yValue;
-            data.year = yValue;
+        if(href.includes(y)){
+            url += "&year="+year;
+            data.year = year;
         }
 
         data.available = available;
 
+        var page = href.split('page=')[1];
+
         url += "&available="+available+"&page="+page;
 
-        $.ajax({
-            url:url,
-            data: data,
-            success: function(response){
-            $('#car_table').html(response);
-            // console.log(response);
-            }
-        });
+        ajaxRequest(url, data);
     }
 });
 
+// Makes the ajax request with received url and data
+function ajaxRequest(url, data){
+    $.ajax({
+        url:url,
+        data:data,
+        success:function(response) {
+            $('#car_table').html(response);
+        }
+    });
+}
+
+// returns array with field values
+function values(){
+    var brand = $('#brand').val();
+    var model = $('#model').val();
+    var year = $('#year').val();
+    var available = 0;
+    if($('#available').is(':checked')){
+        var available = 1;
+    }
+
+    return [brand, model, year, available];
+}
+
+// on clicking table row, opens window to show that car
 $(document).on('click', 'tr', function(){
     var id = ($(this).data('id'));
     window.location.href = "/cars/"+id;
